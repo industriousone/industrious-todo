@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          x:Class="Industrious.ToDo.Forms.ItemViewCell">
+    <ViewCell.ContextActions>
+        <MenuItem
+            Text="Delete"
+            IsDestructive="True" />
+    </ViewCell.ContextActions>
+    <ViewCell.View>
+        <StackLayout
+            Orientation="Horizontal"
+            Margin="12,0">
+            <Switch
+                HorizontalOptions="Start"
+                VerticalOptions="Center"
+                Margin="4,0" />
+            <Label
+                Text="{Binding .}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center" />
+        </StackLayout>
+    </ViewCell.View>
+</ViewCell>
+

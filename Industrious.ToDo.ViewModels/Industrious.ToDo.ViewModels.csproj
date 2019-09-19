@@ -7,4 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Industrious.ToDo\Industrious.ToDo.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Industrious.Mvvm" Version="1.0.0" />
+  </ItemGroup>
 </Project>

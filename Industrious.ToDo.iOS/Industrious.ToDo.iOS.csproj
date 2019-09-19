@@ -89,6 +89,14 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-152.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-167.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-1024.png" />
+    <ImageAsset Include="Assets.xcassets\add_item.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\delete_item.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\add_item.imageset\icons8-plus-math-25.png" />
+    <ImageAsset Include="Assets.xcassets\add_item.imageset\icons8-plus-math-50.png" />
+    <ImageAsset Include="Assets.xcassets\add_item.imageset\icons8-plus-math-100.png" />
+    <ImageAsset Include="Assets.xcassets\delete_item.imageset\icons8-trash-25.png" />
+    <ImageAsset Include="Assets.xcassets\delete_item.imageset\icons8-trash-50.png" />
+    <ImageAsset Include="Assets.xcassets\delete_item.imageset\icons8-trash-100.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -99,13 +107,17 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Industrious.ToDo.Forms\Industrious.ToDo.Forms.csproj">
       <Project>{1CF37FCB-B462-4852-9B6C-558DE0E04803}</Project>
       <Name>Industrious.ToDo.Forms</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\add_item.imageset\" />
+    <Folder Include="Assets.xcassets\delete_item.imageset\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

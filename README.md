@@ -17,7 +17,8 @@ Industrious One's take on the canonical to-do list example application.
 
 Demonstrates how to use the various Industrious packages together in something resembling a real-world application, as well as my ability to create a canonical to-do list example. The packages in use so far include:
 
-- None. I'm just getting started, check back in a bit.
+- [Industrious.Forms](https://github.com/industriousone/Industrious.Forms)
+- [Industrious.Mvvm](https://github.com/industriousone/Industrious.Mvvm)
 
 **Industrious.ToDo** is developed using [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/), and currently includes targets for iOS and Android.
 
@@ -30,4 +31,4 @@ Demonstrates how to use the various Industrious packages together in something r
 
 [MIT](https://opensource.org/licenses/MIT)
 
-[Cloud Checkbox icon](https://icons8.com/icon/110574/checked-checkbox) by [Icons8](https://icons8.com).
+[Cloud Checkbox icon](https://icons8.com/icon/110574/checked-checkbox) and in-app icons by [Icons8](https://icons8.com).
