@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Industrious.ToDo.Forms.SplitView">
+    <Grid
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="0.5" />
+            <ColumnDefinition
+                Width="*" />
+        </Grid.ColumnDefinitions>
+        <ContentView
+            x:Name="LeftContentView"
+            Grid.Row="0"
+            Grid.Column="0" />
+        <BoxView
+            BackgroundColor="Silver"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            Grid.Row="0"
+            Grid.Column="1" />
+        <ContentView
+            x:Name="RightContentView"
+            Grid.Row="0"
+            Grid.Column="2" />
+    </Grid>
+</ContentView>
