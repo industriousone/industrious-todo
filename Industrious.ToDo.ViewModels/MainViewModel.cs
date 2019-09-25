@@ -1,21 +1,28 @@
 ﻿using System;
-
+using System.ComponentModel;
 using Industrious.Mvvm;
 
 namespace Industrious.ToDo.ViewModels
 {
 	public class MainViewModel
 	{
-		public MainViewModel(IAppNavigator navigation)
+		private readonly AppState _appState;
+
+		public MainViewModel(IAppNavigator appNavigator, AppState appState)
 		{
+			_appState = appState;
+			_appState.PropertyChanged += OnAppStatePropertyChanged;
+
 			AddItemCommand = new Command(() =>
 			{
-				navigation.ShowEditorPage();
+				var item = appState.AddNewItem();
+				appState.SelectItem(item);
+				appNavigator.ShowEditorPage();
 			});
 
 			DeleteItemCommand = new Command(
-				() => { },
-				() => false
+				() => appState.DeleteItem(appState.SelectedItem),
+				() => (appState.SelectedItem != null)
 			);
 		}
 
@@ -24,5 +31,16 @@ namespace Industrious.ToDo.ViewModels
 
 
 		public Command DeleteItemCommand { get; }
+
+
+		private void OnAppStatePropertyChanged(Object sender, PropertyChangedEventArgs e)
+		{
+			switch (e.PropertyName)
+			{
+			case nameof(AppState.SelectedItem):
+				DeleteItemCommand.RaiseCanExecuteChanged();
+				break;
+			}
+		}
 	}
 }

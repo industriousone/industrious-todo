@@ -20,15 +20,21 @@ Demonstrates how to use the various Industrious packages together in something r
 - [Industrious.Forms](https://github.com/industriousone/Industrious.Forms)
 - [Industrious.Mvvm](https://github.com/industriousone/Industrious.Mvvm)
 
+This current iteration is a simple MVVM-based approach using mutable model objects. Once I have everything working to my liking I'll introduce a [Redux](https://redux.js.org)-style unidirectional data flow with immutable objects. I'm taking this approach to verify that the support libraries work property with both mutable and immutable objects.
+
 **Industrious.ToDo** is developed using [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/), and currently includes targets for iOS and Android.
 
 ## Stay in touch
 
-* Website - https://industriousone.com
-* Twitter - [@industrious](https://twitter.com/industrious)
+- Website - https://industriousone.com
+- Twitter - [@industrious](https://twitter.com/industrious)
 
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
 
 [Cloud Checkbox icon](https://icons8.com/icon/110574/checked-checkbox) and in-app icons by [Icons8](https://icons8.com).
+
+## Side Notes
+
+- `ItemViewCellModel.Title` setter has a workaround for [Xamarin.Forms issue #6118](https://github.com/xamarin/xamarin-macios/issues/6118)

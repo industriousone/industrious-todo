@@ -1,30 +1,27 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentView
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Industrious.ToDo.Forms"
-    xmlns:forms="clr-namespace:Industrious.Forms;assembly=Industrious.Forms"
-    x:Class="Industrious.ToDo.Forms.ItemListView">
-    <StackLayout>
-        <ListView
-            ItemsSource="{Binding Items}"
-            ItemSelected="OnItemSelected"
-            IsVisible="{forms:BooleanBinding Items.Count}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <local:ItemViewCell />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <StackLayout
-            VerticalOptions="CenterAndExpand"
-            IsVisible="{forms:BooleanBinding !Items.Count}">
-            <Label
-                Text="Inbox zero!"
-                FontSize="Large"
-                TextColor="Gray"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
-    </StackLayout>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:Industrious.ToDo.Forms"
+			 xmlns:forms="clr-namespace:Industrious.Forms;assembly=Industrious.Forms"
+			 x:Class="Industrious.ToDo.Forms.ItemListView">
+	<StackLayout>
+		<ListView ItemsSource="{Binding Items}"
+				  ItemTapped="OnItemTapped"
+				  CachingStrategy="RecycleElement"
+				  IsVisible="{forms:BooleanBinding Items.Count}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<local:ItemViewCell />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<StackLayout VerticalOptions="CenterAndExpand"
+					 IsVisible="{forms:BooleanBinding !Items.Count}">
+			<Label Text="Inbox zero!"
+				   FontSize="Large"
+				   TextColor="Gray"
+				   HorizontalOptions="CenterAndExpand"
+				   VerticalOptions="CenterAndExpand" />
+		</StackLayout>
+	</StackLayout>
 </ContentView>

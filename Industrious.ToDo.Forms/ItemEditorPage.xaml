@@ -6,7 +6,8 @@
     x:Class="Industrious.ToDo.Forms.ItemEditorPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            IconImageSource="delete_item" />
+            IconImageSource="delete_item"
+            Command="{Binding DeleteItemCommand}" />
         <ToolbarItem
             IconImageSource="add_item"
             Command="{Binding AddItemCommand}" />

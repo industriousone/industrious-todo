@@ -5,18 +5,21 @@
     <ViewCell.ContextActions>
         <MenuItem
             Text="Delete"
-            IsDestructive="True" />
+            IsDestructive="True"
+            Command="{Binding DeleteItemCommand}" />
     </ViewCell.ContextActions>
     <ViewCell.View>
         <StackLayout
             Orientation="Horizontal"
             Margin="12,0">
             <Switch
+                IsToggled="{Binding IsComplete}"
+                Toggled="OnIsCompleteToggled"
                 HorizontalOptions="Start"
                 VerticalOptions="Center"
                 Margin="4,0" />
             <Label
-                Text="{Binding .}"
+                Text="{Binding Title}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="Center" />
         </StackLayout>
