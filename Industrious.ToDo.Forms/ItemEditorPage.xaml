@@ -1,18 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Industrious.ToDo.Forms"
-    x:Class="Industrious.ToDo.Forms.ItemEditorPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            IconImageSource="delete_item"
-            Command="{Binding DeleteItemCommand}" />
-        <ToolbarItem
-            IconImageSource="add_item"
-            Command="{Binding AddItemCommand}" />
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <local:ItemEditorView />
-    </ContentPage.Content>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:Industrious.ToDo.Forms"
+			 x:Class="Industrious.ToDo.Forms.ItemEditorPage">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem IconImageSource="delete_item"
+					 Command="{Binding DeleteItemCommand}" />
+		<ToolbarItem IconImageSource="add_item"
+					 Command="{Binding AddItemCommand}" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<local:ItemEditorView />
+	</ContentPage.Content>
 </ContentPage>
