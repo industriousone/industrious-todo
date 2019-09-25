@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace Industrious.ToDo.Forms
 {
-	public partial class MainTwoColumnPage : ContentPage
+	public partial class SplitViewPage : ContentPage
 	{
-		public MainTwoColumnPage()
+		public SplitViewPage()
 		{
 			InitializeComponent();
 		}

@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace Industrious.ToDo.Forms
 {
-	public partial class MainOneColumnPage : ContentPage
+	public partial class ItemListPage : ContentPage
 	{
-		public MainOneColumnPage()
+		public ItemListPage()
 		{
 			InitializeComponent();
 			NavigationPage.SetBackButtonTitle(this, "");

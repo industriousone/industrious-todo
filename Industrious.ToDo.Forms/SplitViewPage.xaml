@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:local="clr-namespace:Industrious.ToDo.Forms"
-			 x:Class="Industrious.ToDo.Forms.MainTwoColumnPage"
+			 x:Class="Industrious.ToDo.Forms.SplitViewPage"
 			 Title="GottaDo">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem IconImageSource="delete_item"

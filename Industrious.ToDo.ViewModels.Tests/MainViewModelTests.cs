@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Industrious.ToDo.ViewModels.Tests
 {
-	public class MainViewModelTests
+	public class MainPageViewModelTests
 	{
 		private readonly ToDoItem[] TestItems =
 		{
@@ -15,7 +15,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		private readonly AppState _state;
 
 
-		public MainViewModelTests()
+		public MainPageViewModelTests()
 		{
 			_state = new AppState(TestItems);
 		}
@@ -24,7 +24,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		[Fact]
 		public void AddItemCommand_DoesAddItem()
 		{
-			var sut = new MainViewModel(new MockNavigator(), _state);
+			var sut = new MainPageViewModel(new MockNavigator(), _state);
 			sut.AddItemCommand.Execute(null);
 			Assert.Equal(4, _state.Items.Count);
 		}
@@ -34,7 +34,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void AddItemCommand_NavigatesToEditorPage()
 		{
 			var navigator = new MockNavigator();
-			var sut = new MainViewModel(navigator, _state);
+			var sut = new MainPageViewModel(navigator, _state);
 			sut.AddItemCommand.Execute(null);
 			Assert.True(navigator.IsEditorVisible);
 		}
@@ -45,7 +45,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		{
 			_state.SelectItem(TestItems[0]);
 
-			var sut = new MainViewModel(new MockNavigator(), _state);
+			var sut = new MainPageViewModel(new MockNavigator(), _state);
 			sut.DeleteItemCommand.Execute(null);
 			Assert.DoesNotContain(TestItems[0], _state.Items);
 		}
@@ -55,7 +55,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void DeleteItemCommand_DoesDisable_WhenNoItemSelected()
 		{
 			_state.SelectItem(TestItems[0]);
-			var sut = new MainViewModel(new MockNavigator(), _state);
+			var sut = new MainPageViewModel(new MockNavigator(), _state);
 
 			_state.SelectItem(null);
 			Assert.False(sut.DeleteItemCommand.CanExecute(null));
@@ -65,7 +65,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		[Fact]
 		public void DeleteItemCommand_DoesEnable_WhenNoItemSelected()
 		{
-			var sut = new MainViewModel(new MockNavigator(), _state);
+			var sut = new MainPageViewModel(new MockNavigator(), _state);
 			_state.SelectItem(TestItems[0]);
 			Assert.True(sut.DeleteItemCommand.CanExecute(null));
 		}
