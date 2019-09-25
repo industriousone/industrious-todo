@@ -100,5 +100,41 @@ namespace Industrious.ToDo
 		}
 
 		#endregion
+
+		#region Serialization
+
+		/// <summary>
+		///  A simple data-only version for serialization.
+		/// </summary>
+		public class Serialized
+		{
+			public Int32 Version;
+			public Guid ID;
+			public String Title;
+			public String Notes;
+			public Boolean IsComplete;
+		}
+
+
+		public static ToDoItem Deserialize(Serialized serialized)
+		{
+			var item = new ToDoItem(serialized.ID, serialized.Title, serialized.IsComplete, serialized.Notes);
+			return (item);
+		}
+
+
+		public Serialized Serialize()
+		{
+			return new Serialized
+			{
+				Version = 0,
+				ID = ID,
+				Title = Title,
+				Notes = Notes,
+				IsComplete = IsComplete
+			};
+		}
+
+		#endregion
 	}
 }

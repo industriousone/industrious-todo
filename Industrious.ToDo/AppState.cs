@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
+using System.Linq;
 using Industrious.Mvvm;
 
 namespace Industrious.ToDo
@@ -52,5 +52,43 @@ namespace Industrious.ToDo
 		{
 			SelectedItem = item;
 		}
+
+
+		#region Serialization
+
+		/// <summary>
+		///  A simple data-only version for serialization.
+		/// </summary>
+		public class Serialized
+		{
+			public Int32 Version;
+			public ToDoItem.Serialized[] Items;
+			public Int32 SelectedItemIndex;
+		}
+
+
+		public static AppState Deserialize(Serialized serialized)
+		{
+			var items = serialized.Items.Select(ToDoItem.Deserialize);
+			var state = new AppState(items);
+
+			if (serialized.SelectedItemIndex > -1)
+				state.SelectedItem = state.Items[serialized.SelectedItemIndex];
+
+			return (state);
+		}
+
+
+		public Serialized Serialize()
+		{
+			return new Serialized
+			{
+				Version = 0,
+				Items = Items.Select(item => item.Serialize()).ToArray(),
+				SelectedItemIndex = (SelectedItem != null) ? Items.IndexOf(SelectedItem) : -1
+			};
+		}
+
+		#endregion
 	}
 }
