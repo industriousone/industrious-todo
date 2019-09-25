@@ -7,9 +7,14 @@ namespace Industrious.ToDo.Forms
 {
 	public partial class App : Application, IAppNavigator
 	{
+		private readonly AppState _appState;
+
+
 		public App()
 		{
 			InitializeComponent();
+
+			_appState = new AppState();
 
 			MainPage = new NavigationPage(CreateMainPage());
 		}
@@ -18,13 +23,20 @@ namespace Industrious.ToDo.Forms
 		public Page CurrentPage => ((NavigationPage)MainPage).CurrentPage;
 
 
+		public void DismissEditorPage()
+		{
+			if (!ShouldSplitScreen() && CurrentPage is ItemEditorPage)
+				MainPage.Navigation.PopAsync();
+		}
+
+
 		public void ShowEditorPage()
 		{
 			if (!ShouldSplitScreen() && !(CurrentPage is ItemEditorPage))
 			{
 				MainPage.Navigation.PushAsync(new ItemEditorPage()
 				{
-					BindingContext = new ItemEditorViewModel()
+					BindingContext = new ItemEditorViewModel(this, _appState)
 				});
 			}
 		}
@@ -42,10 +54,10 @@ namespace Industrious.ToDo.Forms
 		{
 			return (new MainOneColumnPage()
 			{
-				BindingContext = new MainViewModel(this),
+				BindingContext = new MainViewModel(this, _appState),
 				Content = new ItemListView()
 				{
-					BindingContext = new ItemListViewModel(this)
+					BindingContext = new ItemListViewModel(this, _appState)
 				}
 			});
 		}
@@ -55,14 +67,14 @@ namespace Industrious.ToDo.Forms
 		{
 			return (new MainTwoColumnPage()
 			{
-				BindingContext = new MainViewModel(this),
+				BindingContext = new MainViewModel(this, _appState),
 				LeftContent = new ItemListView()
 				{
-					BindingContext = new ItemListViewModel(this)
+					BindingContext = new ItemListViewModel(this, _appState)
 				},
 				RightContent = new ItemEditorView()
 				{
-					BindingContext = new ItemEditorViewModel()
+					BindingContext = new ItemEditorViewModel(this, _appState)
 				}
 			});
 		}

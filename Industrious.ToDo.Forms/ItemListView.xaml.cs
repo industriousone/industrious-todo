@@ -16,9 +16,10 @@ namespace Industrious.ToDo.Forms
 		public ItemListViewModel ViewModel => (ItemListViewModel)BindingContext;
 
 
-		public void OnItemSelected(Object sender, SelectedItemChangedEventArgs e)
+		public void OnItemTapped(Object sender, ItemTappedEventArgs e)
 		{
-			ViewModel.SelectItemCommand.Execute(null);
+			var selectedItem = (ItemViewCellModel)e.Item;
+			ViewModel.SelectItemCommand.Execute(selectedItem);
 		}
 	}
 }

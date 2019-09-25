@@ -7,14 +7,18 @@
     <StackLayout
         Margin="20,20">
         <StackLayout
-            IsVisible="{forms:BooleanBinding IsItemSelected}">
+            IsVisible="{forms:BooleanBinding SelectedItem}">
             <Entry
+                Text="{Binding Title}"
+                TextChanged="OnTitleChanged"
                 Placeholder="Title" />
             <OnPlatform
                 x:TypeArguments="View">
                 <On
                     Platform="Android">
                     <Editor
+                        Text="{Binding Notes}"
+                        TextChanged="OnNotesChanged"
                         Placeholder="Notes"
                         HeightRequest="100" />
                 </On>
@@ -25,6 +29,8 @@
                         HasShadow="false"
                         Padding="4,4">
                         <Editor
+                            Text="{Binding Notes}"
+                            TextChanged="OnNotesChanged"
                             Placeholder="Notes"
                             PlaceholderColor="#b5b5b5"
                             HeightRequest="100" />
@@ -34,6 +40,8 @@
             <StackLayout
                 Orientation="Horizontal">
                 <Switch
+                    IsToggled="{Binding IsComplete}"
+                    Toggled="OnIsCompleteToggled"
                     HorizontalOptions="Start"
                     VerticalOptions="Center" />
                 <Label
@@ -44,7 +52,7 @@
         </StackLayout>
         <StackLayout
             VerticalOptions="CenterAndExpand"
-            IsVisible="{forms:BooleanBinding !IsItemSelected}">
+            IsVisible="{forms:BooleanBinding !SelectedItem}">
             <Label
                 Text="No Item Selected"
                 FontSize="Large"
