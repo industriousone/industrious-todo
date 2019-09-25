@@ -4,11 +4,11 @@ using Industrious.Mvvm;
 
 namespace Industrious.ToDo.ViewModels
 {
-	public class MainViewModel
+	public class MainPageViewModel
 	{
 		private readonly AppState _appState;
 
-		public MainViewModel(IAppNavigator appNavigator, AppState appState)
+		public MainPageViewModel(IAppNavigator appNavigator, AppState appState)
 		{
 			_appState = appState;
 			_appState.PropertyChanged += OnAppStatePropertyChanged;

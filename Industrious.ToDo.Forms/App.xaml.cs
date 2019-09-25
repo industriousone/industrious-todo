@@ -63,9 +63,9 @@ namespace Industrious.ToDo.Forms
 
 		private Page CreateMainOneColumnPage()
 		{
-			return (new MainOneColumnPage()
+			return (new ItemListPage()
 			{
-				BindingContext = new MainViewModel(this, _appState),
+				BindingContext = new MainPageViewModel(this, _appState),
 				Content = new ItemListView()
 				{
 					BindingContext = new ItemListViewModel(this, _appState)
@@ -76,9 +76,9 @@ namespace Industrious.ToDo.Forms
 
 		private Page CreateMainTwoColumnPage()
 		{
-			return (new MainTwoColumnPage()
+			return (new SplitViewPage()
 			{
-				BindingContext = new MainViewModel(this, _appState),
+				BindingContext = new MainPageViewModel(this, _appState),
 				LeftContent = new ItemListView()
 				{
 					BindingContext = new ItemListViewModel(this, _appState)
