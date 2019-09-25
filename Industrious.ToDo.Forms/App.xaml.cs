@@ -2,11 +2,15 @@
 using Xamarin.Forms;
 
 using Industrious.ToDo.ViewModels;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Industrious.ToDo.Forms
 {
 	public partial class App : Application, IAppNavigator
 	{
+		private const String SERIALIZATION_KEY = "AppState";
+
 		private readonly AppState _appState;
 
 
@@ -14,7 +18,7 @@ namespace Industrious.ToDo.Forms
 		{
 			InitializeComponent();
 
-			_appState = new AppState();
+			_appState = RestoreState() ?? new AppState();
 
 			MainPage = new NavigationPage(CreateMainPage());
 		}
@@ -39,6 +43,13 @@ namespace Industrious.ToDo.Forms
 					BindingContext = new ItemEditorViewModel(this, _appState)
 				});
 			}
+		}
+
+
+		protected override void OnSleep()
+		{
+			SaveState();
+			base.OnSleep();
 		}
 
 
@@ -94,6 +105,35 @@ namespace Industrious.ToDo.Forms
 
 			default:
 				return (false);
+			}
+		}
+
+
+		private AppState RestoreState()
+		{
+			if (Properties.ContainsKey(SERIALIZATION_KEY))
+			{
+				var serializedString = (String)Properties[SERIALIZATION_KEY];
+
+				XmlSerializer xmlSerializer = new XmlSerializer(typeof(AppState.Serialized));
+				using (StringReader textReader = new StringReader(serializedString))
+				{
+					var serialized = (AppState.Serialized)xmlSerializer.Deserialize(textReader);
+					return (AppState.Deserialize(serialized));
+				}
+			}
+
+			return (null);
+		}
+
+
+		private void SaveState()
+		{
+			XmlSerializer xmlSerializer = new XmlSerializer(typeof(AppState.Serialized));
+			using (StringWriter textWriter = new StringWriter())
+			{
+				xmlSerializer.Serialize(textWriter, _appState.Serialize());
+				Properties[SERIALIZATION_KEY] = textWriter.ToString();
 			}
 		}
 	}
