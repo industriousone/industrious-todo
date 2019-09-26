@@ -8,12 +8,15 @@ namespace Industrious.ToDo.ViewModels
 {
 	public class ItemEditorViewModel : NotifyPropertyChanged, IDisposable
 	{
+		private readonly IAppNavigator _appNavigator;
 		private readonly AppState _appState;
 
 
 		public ItemEditorViewModel(IAppNavigator appNavigator, AppState appState)
 		{
+			_appNavigator = appNavigator;
 			_appState = appState;
+
 			_appState.PropertyChanged += OnAppStatePropertyChanged;
 
 			OnSelectedItemChanged(_appState.SelectedItem);
@@ -22,7 +25,6 @@ namespace Industrious.ToDo.ViewModels
 			{
 				var item = appState.AddNewItem();
 				appState.SelectItem(item);
-				appNavigator.ShowEditorPage();
 			});
 
 			ChangeNotesCommand = new Command<String>(value =>
@@ -40,7 +42,7 @@ namespace Industrious.ToDo.ViewModels
 			DeleteItemCommand = new Command(() =>
 			{
 				appState.DeleteItem(SelectedItem);
-				appNavigator.DismissEditorPage();
+				appNavigator.DismissEditor();
 			});
 
 			ToggleCompleteCommand = new Command<Boolean>(value =>
@@ -130,12 +132,12 @@ namespace Industrious.ToDo.ViewModels
 				SelectedItem.PropertyChanged -= OnToDoItemPropertyChanged;
 
 			SelectedItem = newSelectedItem;
+			OnToDoItemPropertyChanged(null, null);
 
 			if (SelectedItem != null)
 				SelectedItem.PropertyChanged += OnToDoItemPropertyChanged;
-
-
-			OnToDoItemPropertyChanged(null, null);
+			else
+				_appNavigator.DismissEditor();
 		}
 
 

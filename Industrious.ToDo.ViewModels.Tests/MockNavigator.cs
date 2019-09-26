@@ -7,13 +7,13 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public Boolean IsEditorVisible;
 
 
-		public void DismissEditorPage()
+		public void DismissEditor()
 		{
 			IsEditorVisible = false;
 		}
 
 
-		public void ShowEditorPage()
+		public void ShowEditor()
 		{
 			IsEditorVisible = true;
 		}

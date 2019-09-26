@@ -35,7 +35,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 
 
 		[Fact]
-		public void SelectItemCommand_NavigatesToEditor()
+		public void SelectItemCommand_NavigatesToEditor_WhenItemSelected()
 		{
 			var navigator = new MockNavigator()
 			{
