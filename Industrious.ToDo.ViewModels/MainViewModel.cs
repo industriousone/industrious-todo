@@ -17,7 +17,7 @@ namespace Industrious.ToDo.ViewModels
 			{
 				var item = appState.AddNewItem();
 				appState.SelectItem(item);
-				appNavigator.ShowEditorPage();
+				appNavigator.ShowEditor();
 			});
 
 			DeleteItemCommand = new Command(

@@ -4,47 +4,36 @@
 			 xmlns:forms="clr-namespace:Industrious.Forms;assembly=Industrious.Forms"
 			 x:Class="Industrious.ToDo.Forms.ItemEditorView">
 	<StackLayout Margin="20,20">
-		<StackLayout IsVisible="{forms:BooleanBinding SelectedItem}">
-			<Entry Text="{Binding Title}"
-				   TextChanged="OnTitleChanged"
-				   Placeholder="Title" />
-			<OnPlatform x:TypeArguments="View">
-				<On Platform="Android">
+		<Entry Text="{Binding Title}"
+			   TextChanged="OnTitleChanged"
+			   Placeholder="Title" />
+		<OnPlatform x:TypeArguments="View">
+			<On Platform="Android">
+				<Editor Text="{Binding Notes}"
+						TextChanged="OnNotesChanged"
+						Placeholder="Notes"
+						HeightRequest="100" />
+			</On>
+			<On Platform="iOS">
+				<Frame BorderColor="#e7e7e7"
+					   HasShadow="false"
+					   Padding="4,4">
 					<Editor Text="{Binding Notes}"
 							TextChanged="OnNotesChanged"
 							Placeholder="Notes"
+							PlaceholderColor="#b5b5b5"
 							HeightRequest="100" />
-				</On>
-				<On Platform="iOS">
-
-					<Frame BorderColor="#e7e7e7"
-						   HasShadow="false"
-						   Padding="4,4">
-						<Editor Text="{Binding Notes}"
-								TextChanged="OnNotesChanged"
-								Placeholder="Notes"
-								PlaceholderColor="#b5b5b5"
-								HeightRequest="100" />
-					</Frame>
-				</On>
-			</OnPlatform>
-			<StackLayout Orientation="Horizontal">
-				<Switch IsToggled="{Binding IsComplete}"
-						Toggled="OnIsCompleteToggled"
-						HorizontalOptions="Start"
-						VerticalOptions="Center" />
-				<Label Text="Completed"
-					   HorizontalOptions="FillAndExpand"
-					   VerticalOptions="Center" />
-			</StackLayout>
-		</StackLayout>
-		<StackLayout VerticalOptions="CenterAndExpand"
-					 IsVisible="{forms:BooleanBinding !SelectedItem}">
-			<Label Text="No Item Selected"
-				   FontSize="Large"
-				   TextColor="Gray"
-				   HorizontalOptions="CenterAndExpand"
-				   VerticalOptions="CenterAndExpand" />
+				</Frame>
+			</On>
+		</OnPlatform>
+		<StackLayout Orientation="Horizontal">
+			<Switch IsToggled="{Binding IsComplete}"
+					Toggled="OnIsCompleteToggled"
+					HorizontalOptions="Start"
+					VerticalOptions="Center" />
+			<Label Text="Completed"
+				   HorizontalOptions="FillAndExpand"
+				   VerticalOptions="Center" />
 		</StackLayout>
 	</StackLayout>
 </ContentView>

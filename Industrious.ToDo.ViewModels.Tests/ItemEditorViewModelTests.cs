@@ -246,5 +246,22 @@ namespace Industrious.ToDo.ViewModels.Tests
 				Assert.False(sut.IsComplete);
 			}
 		}
+
+
+		[Fact]
+		public void DismissesEditor_WhenNoItemSelected()
+		{
+			var navigator = new MockNavigator()
+			{
+				IsEditorVisible = true
+			};
+
+			_state.SelectItem(TestItems[0]);
+			using (var sut = new ItemEditorViewModel(navigator, _state))
+			{
+				_state.SelectItem(null);
+				Assert.False(navigator.IsEditorVisible);
+			}
+		}
 	}
 }

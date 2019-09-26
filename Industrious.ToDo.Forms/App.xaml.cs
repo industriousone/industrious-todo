@@ -24,19 +24,37 @@ namespace Industrious.ToDo.Forms
 		}
 
 
-		public Page CurrentPage => ((NavigationPage)MainPage).CurrentPage;
+		public ContentPage CurrentPage => (ContentPage)((NavigationPage)MainPage).CurrentPage;
 
 
-		public void DismissEditorPage()
+		public void DismissEditor()
 		{
-			if (!ShouldSplitScreen() && CurrentPage is ItemEditorPage)
+			if (IsSplitScreen)
+			{
+				var splitView = (SplitView)CurrentPage.Content;
+				splitView.RightContent = new NoItemSelectedView();
+			}
+			else if (CurrentPage is ItemEditorPage)
+			{
 				MainPage.Navigation.PopAsync();
+			}
 		}
 
 
-		public void ShowEditorPage()
+		public void ShowEditor()
 		{
-			if (!ShouldSplitScreen() && !(CurrentPage is ItemEditorPage))
+			if (IsSplitScreen)
+			{
+				var splitView = (SplitView)CurrentPage.Content;
+				if (!(splitView.RightContent is ItemEditorView))
+				{
+					splitView.RightContent = new ItemEditorView()
+					{
+						BindingContext = new ItemEditorViewModel(this, _appState)
+					};
+				}
+			}
+			else if (!(CurrentPage is ItemEditorPage))
 			{
 				MainPage.Navigation.PushAsync(new ItemEditorPage()
 				{
@@ -55,7 +73,7 @@ namespace Industrious.ToDo.Forms
 
 		private Page CreateMainPage()
 		{
-			return (ShouldSplitScreen())
+			return (IsSplitScreen)
 				? CreateMainTwoColumnPage()
 				: CreateMainOneColumnPage();
 		}
@@ -83,10 +101,7 @@ namespace Industrious.ToDo.Forms
 				{
 					BindingContext = new ItemListViewModel(this, _appState)
 				},
-				RightContent = new ItemEditorView()
-				{
-					BindingContext = new ItemEditorViewModel(this, _appState)
-				}
+				RightContent = new NoItemSelectedView()
 			});
 		}
 
@@ -94,17 +109,20 @@ namespace Industrious.ToDo.Forms
 		/// <summary>
 		///  Decide if the device screen is large enough to support the two-column view.
 		/// </summary>
-		private Boolean ShouldSplitScreen()
+		private Boolean IsSplitScreen
 		{
-			switch (Device.Idiom)
+			get
 			{
-			case TargetIdiom.Tablet:
-			case TargetIdiom.Desktop:
-			case TargetIdiom.TV:
-				return (true);
+				switch (Device.Idiom)
+				{
+				case TargetIdiom.Tablet:
+				case TargetIdiom.Desktop:
+				case TargetIdiom.TV:
+					return (true);
 
-			default:
-				return (false);
+				default:
+					return (false);
+				}
 			}
 		}
 

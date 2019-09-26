@@ -16,7 +16,7 @@ namespace Industrious.ToDo.ViewModels
 				if (itemViewCellModel != null)
 				{
 					appState.SelectItem(itemViewCellModel.ToDoItem);
-					navigation.ShowEditorPage();
+					navigation.ShowEditor();
 				}
 				else
 				{
