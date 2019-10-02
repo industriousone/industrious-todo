@@ -25,7 +25,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void Constructor_InitializesIsComplete_ToSelectedItemValue()
 		{
 			_state.SelectItem(TestItems[1]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				Assert.Equal(TestItems[1].IsComplete, sut.IsComplete);
 			}
@@ -36,7 +36,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void Constructor_InitializesNotes_ToSelectedItemValue()
 		{
 			_state.SelectItem(TestItems[1]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				Assert.Equal(TestItems[1].Notes, sut.Notes);
 			}
@@ -47,38 +47,9 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void Constructor_InitializesTitle_ToSelectedItemValue()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				Assert.Equal(TestItems[0].Title, sut.Title);
-			}
-		}
-
-
-		[Fact]
-		public void DeleteItemCommand_DoesDeletesItem()
-		{
-			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
-			{
-				sut.DeleteItemCommand.Execute(null);
-				Assert.DoesNotContain(TestItems[0], _state.Items);
-			}
-		}
-
-
-		[Fact]
-		public void DeleteItemCommand_DismissesEditor()
-		{
-			var navigator = new MockNavigator()
-			{
-				IsEditorVisible = true
-			};
-
-			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(navigator, _state))
-			{
-				sut.DeleteItemCommand.Execute(null);
-				Assert.False(navigator.IsEditorVisible);
 			}
 		}
 
@@ -88,7 +59,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		{
 			_state.SelectItem(TestItems[0]);
 
-			var sut = new ItemEditorViewModel(new MockNavigator(), _state);
+			var sut = new ItemEditorViewModel(_state);
 			sut.Dispose();
 
 			_state.SelectItem(TestItems[1]);
@@ -101,7 +72,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		{
 			_state.SelectItem(TestItems[0]);
 
-			var sut = new ItemEditorViewModel(new MockNavigator(), _state);
+			var sut = new ItemEditorViewModel(_state);
 			sut.Dispose();
 
 			_state.Items[0].IsComplete = true;
@@ -112,7 +83,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		[Fact]
 		public void IsComplete_RaisesPropertyChanged_WhenValueChanged()
 		{
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				String lastPropertyChanged = null;
 				sut.PropertyChanged += (sender, e) => lastPropertyChanged = e.PropertyName;
@@ -127,7 +98,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void IsComplete_Updates_WhenSelectedItemChanges()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				_state.SelectItem(TestItems[1]);
 				Assert.Equal(TestItems[1].IsComplete, sut.IsComplete);
@@ -139,7 +110,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void IsComplete_Updates_WhenSelectedItemIsCompleteChanges()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				_state.Items[0].IsComplete = true;
 				Assert.True(sut.IsComplete);
@@ -150,7 +121,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		[Fact]
 		public void Notes_RaisesPropertyChanged_WhenValueChanges()
 		{
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				String lastPropertyChanged = null;
 				sut.PropertyChanged += (sender, e) => lastPropertyChanged = e.PropertyName;
@@ -165,7 +136,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void Notes_Updates_WhenSelectedItemChanges()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				_state.SelectItem(TestItems[1]);
 				Assert.Equal(TestItems[1].Notes, sut.Notes);
@@ -176,7 +147,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		[Fact]
 		public void Title_RaisesPropertyChanged_WhenValueChanges()
 		{
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				String lastPropertyChanged = null;
 				sut.PropertyChanged += (sender, e) => lastPropertyChanged = e.PropertyName;
@@ -191,7 +162,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void Title_Updates_WhenSelectedItemChanges()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				_state.SelectItem(TestItems[1]);
 				Assert.Equal(TestItems[1].Title, sut.Title);
@@ -203,7 +174,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void ChangeNotesCommand_UpdatesSelectedItemNotes()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				sut.ChangeNotesCommand.Execute("New notes");
 				Assert.Equal("New notes", _state.SelectedItem.Notes);
@@ -215,7 +186,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void ChangeTitleCommand_UpdatesSelectedItemTitle()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				sut.ChangeTitleCommand.Execute("New title");
 				Assert.Equal("New title", _state.SelectedItem.Title);
@@ -227,7 +198,7 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void ToggleCompleteCommand_UpdatesSelectedItemIsComplete()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				sut.ToggleCompleteCommand.Execute(true);
 				Assert.True(_state.SelectedItem.IsComplete);
@@ -239,28 +210,11 @@ namespace Industrious.ToDo.ViewModels.Tests
 		public void UnsubscribesFromItemUpdates_OnItemChanged()
 		{
 			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(new MockNavigator(), _state))
+			using (var sut = new ItemEditorViewModel(_state))
 			{
 				_state.SelectItem(TestItems[2]);
 				_state.Items[0].IsComplete = true;
 				Assert.False(sut.IsComplete);
-			}
-		}
-
-
-		[Fact]
-		public void DismissesEditor_WhenNoItemSelected()
-		{
-			var navigator = new MockNavigator()
-			{
-				IsEditorVisible = true
-			};
-
-			_state.SelectItem(TestItems[0]);
-			using (var sut = new ItemEditorViewModel(navigator, _state))
-			{
-				_state.SelectItem(null);
-				Assert.False(navigator.IsEditorVisible);
 			}
 		}
 	}

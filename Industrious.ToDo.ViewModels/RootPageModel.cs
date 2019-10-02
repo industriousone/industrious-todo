@@ -4,11 +4,11 @@ using Industrious.Mvvm;
 
 namespace Industrious.ToDo.ViewModels
 {
-	public class MainPageViewModel
+	public class RootPageModel
 	{
 		private readonly AppState _appState;
 
-		public MainPageViewModel(IAppNavigator appNavigator, AppState appState)
+		public RootPageModel(AppState appState)
 		{
 			_appState = appState;
 			_appState.PropertyChanged += OnAppStatePropertyChanged;
@@ -17,7 +17,6 @@ namespace Industrious.ToDo.ViewModels
 			{
 				var item = appState.AddNewItem();
 				appState.SelectItem(item);
-				appNavigator.ShowEditor();
 			});
 
 			DeleteItemCommand = new Command(

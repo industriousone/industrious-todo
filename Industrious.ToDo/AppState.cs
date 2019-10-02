@@ -10,17 +10,34 @@ namespace Industrious.ToDo
 	{
 		public AppState()
 		{
+			RunState = RunState.Starting;
 			Items = new ObservableCollection<ToDoItem>();
 		}
 
 
 		public AppState(IEnumerable<ToDoItem> items)
 		{
+			RunState = RunState.Starting;
 			Items = new ObservableCollection<ToDoItem>(items);
 		}
 
 
-		public ObservableCollection<ToDoItem> Items { get; }
+		private ObservableCollection<ToDoItem> _items;
+
+		public ObservableCollection<ToDoItem> Items
+		{
+			get => _items;
+			private set => SetAndRaiseIfChanged(ref _items, value);
+		}
+
+
+		private RunState _runState;
+
+		public RunState RunState
+		{
+			get => _runState;
+			set => SetAndRaiseIfChanged(ref _runState, value);
+		}
 
 
 		private ToDoItem _selectedItem;
@@ -54,6 +71,12 @@ namespace Industrious.ToDo
 		}
 
 
+		public void SetItems(IEnumerable<ToDoItem> items)
+		{
+			Items = new ObservableCollection<ToDoItem>(items);
+		}
+
+
 		#region Serialization
 
 		/// <summary>
@@ -67,15 +90,14 @@ namespace Industrious.ToDo
 		}
 
 
-		public static AppState Deserialize(Serialized serialized)
+		public void Deserialize(Serialized serialized)
 		{
 			var items = serialized.Items.Select(ToDoItem.Deserialize);
-			var state = new AppState(items);
+			SetItems(items);
 
-			if (serialized.SelectedItemIndex > -1)
-				state.SelectedItem = state.Items[serialized.SelectedItemIndex];
-
-			return (state);
+			SelectedItem = (serialized.SelectedItemIndex > -1)
+				? Items[serialized.SelectedItemIndex]
+				: null;
 		}
 
 

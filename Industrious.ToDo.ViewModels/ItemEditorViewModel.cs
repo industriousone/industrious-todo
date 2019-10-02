@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Input;
 
 using Industrious.Mvvm;
 
@@ -8,24 +7,16 @@ namespace Industrious.ToDo.ViewModels
 {
 	public class ItemEditorViewModel : NotifyPropertyChanged, IDisposable
 	{
-		private readonly IAppNavigator _appNavigator;
 		private readonly AppState _appState;
 
 
-		public ItemEditorViewModel(IAppNavigator appNavigator, AppState appState)
+		public ItemEditorViewModel(AppState appState)
 		{
-			_appNavigator = appNavigator;
 			_appState = appState;
 
 			_appState.PropertyChanged += OnAppStatePropertyChanged;
 
 			OnSelectedItemChanged(_appState.SelectedItem);
-
-			AddItemCommand = new Command(() =>
-			{
-				var item = appState.AddNewItem();
-				appState.SelectItem(item);
-			});
 
 			ChangeNotesCommand = new Command<String>(value =>
 			{
@@ -37,12 +28,6 @@ namespace Industrious.ToDo.ViewModels
 			{
 				if (SelectedItem != null)
 					SelectedItem.Title = value;
-			});
-
-			DeleteItemCommand = new Command(() =>
-			{
-				appState.DeleteItem(SelectedItem);
-				appNavigator.DismissEditor();
 			});
 
 			ToggleCompleteCommand = new Command<Boolean>(value =>
@@ -89,24 +74,17 @@ namespace Industrious.ToDo.ViewModels
 		}
 
 
-		public ICommand AddItemCommand { get; }
+		public Command<String> ChangeNotesCommand { get; }
 
 
-		public ICommand ChangeNotesCommand { get; }
+		public Command<String> ChangeTitleCommand { get; }
 
 
-		public ICommand ChangeTitleCommand { get; }
-
-
-		public ICommand DeleteItemCommand { get; }
-
-
-		public ICommand ToggleCompleteCommand { get; }
+		public Command<Boolean> ToggleCompleteCommand { get; }
 
 
 		public void Dispose()
 		{
-			// Called by ItemEditorPage.OnDisappearing()
 			if (_appState != null)
 				_appState.PropertyChanged -= OnAppStatePropertyChanged;
 
@@ -136,8 +114,6 @@ namespace Industrious.ToDo.ViewModels
 
 			if (SelectedItem != null)
 				SelectedItem.PropertyChanged += OnToDoItemPropertyChanged;
-			else
-				_appNavigator.DismissEditor();
 		}
 
 
