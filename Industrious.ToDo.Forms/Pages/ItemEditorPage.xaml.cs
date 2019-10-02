@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Industrious.ToDo.ViewModels;
 
 
-namespace Industrious.ToDo.Forms
+namespace Industrious.ToDo.Forms.Pages
 {
 	public partial class ItemEditorPage : ContentPage
 	{

@@ -3,6 +3,8 @@ using System.IO;
 using System.Xml.Serialization;
 using Xamarin.Forms;
 
+using Industrious.ToDo.Forms.Pages;
+using Industrious.ToDo.Forms.Views;
 using Industrious.ToDo.ViewModels;
 
 namespace Industrious.ToDo.Forms

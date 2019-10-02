@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Industrious.ToDo.Forms
+namespace Industrious.ToDo.Forms.Pages
 {
 	public partial class RootPage : ContentPage
 	{
