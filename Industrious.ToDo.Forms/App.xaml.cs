@@ -1,13 +1,13 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using Xamarin.Forms;
 
 using Industrious.ToDo.ViewModels;
-using System.Xml.Serialization;
-using System.IO;
 
 namespace Industrious.ToDo.Forms
 {
-	public partial class App : Application, IAppNavigator
+	public partial class App : Application, IViewFactory
 	{
 		private const String SERIALIZATION_KEY = "AppState";
 
@@ -18,49 +18,70 @@ namespace Industrious.ToDo.Forms
 		{
 			InitializeComponent();
 
-			_appState = RestoreState() ?? new AppState();
+			_appState = new AppState();
 
-			MainPage = new NavigationPage(CreateMainPage());
+			var router = new FormsRouter(_appState, this);
+			MainPage = router.InitialPage();
+
+			_appState.RunState = RunState.Loading;
+			RestoreState();
+			_appState.RunState = RunState.Loaded;
+
+			_appState.RunState = RunState.Running;
 		}
 
 
-		public ContentPage CurrentPage => (ContentPage)((NavigationPage)MainPage).CurrentPage;
-
-
-		public void DismissEditor()
+		public ItemEditorPage NewItemEditorPage()
 		{
-			if (IsSplitScreen)
+			return (new ItemEditorPage()
 			{
-				var splitView = (SplitView)CurrentPage.Content;
-				splitView.RightContent = new NoItemSelectedView();
-			}
-			else if (CurrentPage is ItemEditorPage)
-			{
-				MainPage.Navigation.PopAsync();
-			}
+				BindingContext = new ItemEditorPageModel(_appState),
+			});
 		}
 
 
-		public void ShowEditor()
+		public ItemEditorView NewItemEditorView()
 		{
-			if (IsSplitScreen)
+			return (new ItemEditorView()
 			{
-				var splitView = (SplitView)CurrentPage.Content;
-				if (!(splitView.RightContent is ItemEditorView))
-				{
-					splitView.RightContent = new ItemEditorView()
-					{
-						BindingContext = new ItemEditorViewModel(this, _appState)
-					};
-				}
-			}
-			else if (!(CurrentPage is ItemEditorPage))
+				BindingContext = new ItemEditorViewModel(_appState)
+			});
+		}
+
+
+		public ItemListView NewItemListView()
+		{
+			return (new ItemListView()
 			{
-				MainPage.Navigation.PushAsync(new ItemEditorPage()
-				{
-					BindingContext = new ItemEditorViewModel(this, _appState)
-				});
-			}
+				BindingContext = new ItemListViewModel(_appState)
+			});
+		}
+
+
+		public NoItemSelectedView NewNoItemSelectedView()
+		{
+			return (new NoItemSelectedView());
+		}
+
+
+		public RootPage NewRootPage(Boolean isSplitView)
+		{
+			return (new RootPage(isSplitView)
+			{
+				BindingContext = new RootPageModel(_appState)
+			});
+		}
+
+
+		public SpinnerView NewSpinnerView()
+		{
+			return (new SpinnerView());
+		}
+
+
+		public SplitView NewSplitView()
+		{
+			return (new SplitView());
 		}
 
 
@@ -71,63 +92,7 @@ namespace Industrious.ToDo.Forms
 		}
 
 
-		private Page CreateMainPage()
-		{
-			return (IsSplitScreen)
-				? CreateMainTwoColumnPage()
-				: CreateMainOneColumnPage();
-		}
-
-
-		private Page CreateMainOneColumnPage()
-		{
-			return (new ItemListPage()
-			{
-				BindingContext = new MainPageViewModel(this, _appState),
-				Content = new ItemListView()
-				{
-					BindingContext = new ItemListViewModel(this, _appState)
-				}
-			});
-		}
-
-
-		private Page CreateMainTwoColumnPage()
-		{
-			return (new SplitViewPage()
-			{
-				BindingContext = new MainPageViewModel(this, _appState),
-				LeftContent = new ItemListView()
-				{
-					BindingContext = new ItemListViewModel(this, _appState)
-				},
-				RightContent = new NoItemSelectedView()
-			});
-		}
-
-
-		/// <summary>
-		///  Decide if the device screen is large enough to support the two-column view.
-		/// </summary>
-		private Boolean IsSplitScreen
-		{
-			get
-			{
-				switch (Device.Idiom)
-				{
-				case TargetIdiom.Tablet:
-				case TargetIdiom.Desktop:
-				case TargetIdiom.TV:
-					return (true);
-
-				default:
-					return (false);
-				}
-			}
-		}
-
-
-		private AppState RestoreState()
+		private void RestoreState()
 		{
 			if (Properties.ContainsKey(SERIALIZATION_KEY))
 			{
@@ -137,11 +102,9 @@ namespace Industrious.ToDo.Forms
 				using (StringReader textReader = new StringReader(serializedString))
 				{
 					var serialized = (AppState.Serialized)xmlSerializer.Deserialize(textReader);
-					return (AppState.Deserialize(serialized));
+					_appState.Deserialize(serialized);
 				}
 			}
-
-			return (null);
 		}
 
 

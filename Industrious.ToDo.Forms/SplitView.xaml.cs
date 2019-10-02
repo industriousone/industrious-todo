@@ -37,7 +37,7 @@ namespace Industrious.ToDo.Forms
 
 		public View RightContent
 		{
-			get => (View)base.GetValue(LeftContentProperty);
+			get => (View)base.GetValue(RightContentProperty);
 			set => base.SetValue(RightContentProperty, value);
 		}
 

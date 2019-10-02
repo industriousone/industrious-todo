@@ -14,12 +14,9 @@ namespace Industrious.ToDo.Forms
 		}
 
 
-		public ItemEditorViewModel ViewModel => (ItemEditorViewModel)BindingContext;
-
-
 		protected override void OnDisappearing()
 		{
-			ViewModel.Dispose();
+			((ItemEditorPageModel)BindingContext).OnViewDisappearing();
 		}
 	}
 }

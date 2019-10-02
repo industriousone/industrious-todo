@@ -6,6 +6,7 @@
 			 x:Class="Industrious.ToDo.Forms.ItemListView">
 	<StackLayout>
 		<ListView ItemsSource="{Binding Items}"
+				  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
 				  ItemTapped="OnItemTapped"
 				  CachingStrategy="RecycleElement"
 				  IsVisible="{forms:BooleanBinding Items.Count}">

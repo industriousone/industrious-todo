@@ -5,7 +5,7 @@ using Industrious.ToDo.ViewModels;
 
 namespace Industrious.ToDo.Forms
 {
-	public partial class ItemEditorView : ContentView
+	public partial class ItemEditorView : ContentView, IDisposable
 	{
 		public ItemEditorView()
 		{
@@ -14,6 +14,12 @@ namespace Industrious.ToDo.Forms
 
 
 		public ItemEditorViewModel ViewModel => (ItemEditorViewModel)BindingContext;
+
+
+		public void Dispose()
+		{
+			ViewModel.Dispose();
+		}
 
 
 		public void OnIsCompleteToggled(Object sender, ToggledEventArgs e)

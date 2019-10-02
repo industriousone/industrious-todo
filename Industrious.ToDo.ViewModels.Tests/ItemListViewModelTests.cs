@@ -17,36 +17,28 @@ namespace Industrious.ToDo.ViewModels.Tests
 		[Fact]
 		public void Constructor_InitializesItems_ToAppStateValue()
 		{
-			var sut = new ItemListViewModel(new MockNavigator(), _state);
+			var sut = new ItemListViewModel(_state);
 			Assert.Equal(TestItems.Length, sut.Items.Count);
+		}
+
+
+		[Fact]
+		public void Constructor_InitializesSelectedItem_ToAppStateValue()
+		{
+			_state.SelectItem(TestItems[0]);
+			var sut = new ItemListViewModel(_state);
+			Assert.Equal(TestItems[0], sut.SelectedItem.ToDoItem);
 		}
 
 
 		[Fact]
 		public void SelectItemCommand_DoesSelectItem()
 		{
-			var sut = new ItemListViewModel(new MockNavigator(), _state);
+			var sut = new ItemListViewModel(_state);
 			using (var itemViewModel = new ItemViewCellModel(_state, TestItems[0]))
 			{
 				sut.SelectItemCommand.Execute(itemViewModel);
 				Assert.Equal(TestItems[0], _state.SelectedItem);
-			}
-		}
-
-
-		[Fact]
-		public void SelectItemCommand_NavigatesToEditor_WhenItemSelected()
-		{
-			var navigator = new MockNavigator()
-			{
-				IsEditorVisible = false
-			};
-
-			var sut = new ItemListViewModel(navigator, _state);
-			using (var itemViewModel = new ItemViewCellModel(_state, TestItems[0]))
-			{
-				sut.SelectItemCommand.Execute(itemViewModel);
-				Assert.True(navigator.IsEditorVisible);
 			}
 		}
 	}
