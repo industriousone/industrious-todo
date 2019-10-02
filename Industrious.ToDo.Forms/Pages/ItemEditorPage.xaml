@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:local="clr-namespace:Industrious.ToDo.Forms"
-			 x:Class="Industrious.ToDo.Forms.SplitViewPage"
-			 Title="GottaDo">
+			 xmlns:views="clr-namespace:Industrious.ToDo.Forms.Views"
+			 x:Class="Industrious.ToDo.Forms.Pages.ItemEditorPage">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem IconImageSource="delete_item"
 					 Command="{Binding DeleteItemCommand}" />
@@ -11,6 +10,6 @@
 					 Command="{Binding AddItemCommand}" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<local:SplitView x:Name="SplitView" />
+		<views:ItemEditorView />
 	</ContentPage.Content>
 </ContentPage>

@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 using Industrious.ToDo.ViewModels;
 
-namespace Industrious.ToDo.Forms
+namespace Industrious.ToDo.Forms.Views
 {
 	public partial class ItemViewCell : ViewCell
 	{

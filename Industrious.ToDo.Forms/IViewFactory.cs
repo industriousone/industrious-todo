@@ -1,5 +1,8 @@
 ﻿using System;
 
+using Industrious.ToDo.Forms.Pages;
+using Industrious.ToDo.Forms.Views;
+
 namespace Industrious.ToDo.Forms
 {
 	/// <summary>

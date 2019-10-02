@@ -2,7 +2,8 @@
 using System.ComponentModel;
 using Xamarin.Forms;
 
-using Industrious.ToDo.ViewModels;
+using Industrious.ToDo.Forms.Pages;
+using Industrious.ToDo.Forms.Views;
 
 namespace Industrious.ToDo.Forms
 {
