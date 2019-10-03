@@ -15,20 +15,20 @@
 
 Industrious One's take on the canonical to-do list example application.
 
-Demonstrates how to use the various Industrious packages together in something resembling a real world application, as well as my ability to create a canonical to-do list example. It way over-engineered for such a simple demo; this is how I architect applications that need scale up to more complex UIs and meaningful feature sets.
+Demonstrates how to use the various Industrious packages together in something resembling a real world application, as well as my ability to create a canonical to-do list example. It's a little over-engineered for such a simple demo; this is how I architect applications that need scale up to more complex UIs and meaningful feature sets.
 
-This current iteration is a "plain" MVVM using mutable model objects. Once I have everything working to my liking I'll introduce a [Redux](https://redux.js.org)-style unidirectional data flow with immutable objects. I'm taking this approach to verify that the support libraries work property with both mutable and immutable objects.
+This current iteration is a "plain" MVVM approach using mutable model objects. Once I have everything working to my liking I'll introduce a [Redux](https://redux.js.org)-style unidirectional data flow with immutable objects. I'm taking this approach to verify that the support libraries work property with both mutable and immutable objects.
 
-The packages in use so far include:
+The packages in use so far (I have a few more on the way) include:
 
 - [Industrious.Forms](https://github.com/industriousone/Industrious.Forms)
 - [Industrious.Mvvm](https://github.com/industriousone/Industrious.Mvvm)
 
-**Industrious.ToDo** is developed using [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/), and currently includes targets for soiOS and Android.
+**Industrious.ToDo** is developed using [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/), and currently includes targets for iOS and Android.
 
 ## Stay in touch
 
-- Website - https://industriousone.com
+- Website - https://industriousone.com/
 - Twitter - [@industrious](https://twitter.com/industrious)
 
 ## License
