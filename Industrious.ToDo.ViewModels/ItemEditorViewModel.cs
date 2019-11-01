@@ -65,6 +65,15 @@ namespace Industrious.ToDo.ViewModels
 		}
 
 
+		private Boolean _shouldFocusTitle;
+
+		public Boolean ShouldFocusTitle
+		{
+			get => _shouldFocusTitle;
+			set => SetAndRaiseIfChanged(ref _shouldFocusTitle, value);
+		}
+
+
 		private String _title;
 
 		public String Title
@@ -113,7 +122,10 @@ namespace Industrious.ToDo.ViewModels
 			OnToDoItemPropertyChanged(null, null);
 
 			if (SelectedItem != null)
+			{
 				SelectedItem.PropertyChanged += OnToDoItemPropertyChanged;
+				ShouldFocusTitle = (Title.Length == 0);
+			}
 		}
 
 

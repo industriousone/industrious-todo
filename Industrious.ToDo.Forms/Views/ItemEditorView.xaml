@@ -6,7 +6,8 @@
 	<StackLayout Margin="20,20">
 		<Entry Text="{Binding Title}"
 			   TextChanged="OnTitleChanged"
-			   Placeholder="Title" />
+			   Placeholder="Title"
+			   forms:AutoFocusBehavior.FocusWhen="{Binding ShouldFocusTitle}" />
 		<OnPlatform x:TypeArguments="View">
 			<On Platform="Android">
 				<Editor Text="{Binding Notes}"
