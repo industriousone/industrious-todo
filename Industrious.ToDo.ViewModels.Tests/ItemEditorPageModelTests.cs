@@ -42,12 +42,12 @@ namespace Industrious.ToDo.ViewModels.Tests
 
 
 		[Fact]
-		public void OnViewDisappearing_DeselectsItem()
+		public void Dispose_DeselectsItem()
 		{
 			_state.SelectItem(TestItems[0]);
 
 			var sut = new ItemEditorPageModel(_state);
-			sut.OnViewDisappearing();
+			sut.Dispose();
 			Assert.Null(_state.SelectedItem);
 		}
 	}

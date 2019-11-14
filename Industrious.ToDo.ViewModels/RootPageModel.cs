@@ -8,6 +8,7 @@ namespace Industrious.ToDo.ViewModels
 	{
 		private readonly AppState _appState;
 
+
 		public RootPageModel(AppState appState)
 		{
 			_appState = appState;
