@@ -3,17 +3,15 @@ using System.IO;
 using System.Xml.Serialization;
 using Xamarin.Forms;
 
-using Industrious.ToDo.Forms.Pages;
-using Industrious.ToDo.Forms.Views;
-using Industrious.ToDo.ViewModels;
-
 namespace Industrious.ToDo.Forms
 {
-	public partial class App : Application, IViewFactory
+	public partial class App : Application
 	{
 		private const String SERIALIZATION_KEY = "AppState";
 
 		private readonly AppState _appState;
+		private readonly IUiPresentation _uiPresentation;
+		private readonly UiPresentationDriver _presentationDriver;
 
 
 		public App()
@@ -21,69 +19,27 @@ namespace Industrious.ToDo.Forms
 			InitializeComponent();
 
 			_appState = new AppState();
+			_uiPresentation = ChoosePresentation();
+			_presentationDriver = new UiPresentationDriver(_appState, _uiPresentation);
 
-			var router = new FormsRouter(_appState, this);
-			MainPage = router.InitialPage();
-
+			// TODO: This should run async so loading screen isn't blocked
 			_appState.RunState = RunState.Loading;
 			RestoreState();
 			_appState.RunState = RunState.Loaded;
-
-			_appState.RunState = RunState.Running;
 		}
 
 
-		public ItemEditorPage NewItemEditorPage()
+		private IUiPresentation ChoosePresentation()
 		{
-			return (new ItemEditorPage()
+			switch (Device.Idiom)
 			{
-				BindingContext = new ItemEditorPageModel(_appState),
-			});
-		}
+			case TargetIdiom.Tablet:
+				return (new TabletPresentation(_appState));
 
-
-		public ItemEditorView NewItemEditorView()
-		{
-			return (new ItemEditorView()
-			{
-				BindingContext = new ItemEditorViewModel(_appState)
-			});
-		}
-
-
-		public ItemListView NewItemListView()
-		{
-			return (new ItemListView()
-			{
-				BindingContext = new ItemListViewModel(_appState)
-			});
-		}
-
-
-		public NoItemSelectedView NewNoItemSelectedView()
-		{
-			return (new NoItemSelectedView());
-		}
-
-
-		public RootPage NewRootPage(Boolean isSplitView)
-		{
-			return (new RootPage(isSplitView)
-			{
-				BindingContext = new RootPageModel(_appState)
-			});
-		}
-
-
-		public SpinnerView NewSpinnerView()
-		{
-			return (new SpinnerView());
-		}
-
-
-		public SplitView NewSplitView()
-		{
-			return (new SplitView());
+			case TargetIdiom.Phone:
+			default:
+				return (new PhonePresentation(_appState));
+			}
 		}
 
 

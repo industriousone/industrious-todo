@@ -16,7 +16,7 @@ namespace Industrious.ToDo.Forms.Pages
 
 		protected override void OnDisappearing()
 		{
-			((ItemEditorPageModel)BindingContext).OnViewDisappearing();
+			((ItemEditorPageModel)BindingContext).Dispose();
 		}
 	}
 }

@@ -6,7 +6,6 @@ namespace Industrious.ToDo
 	{
 		Starting,
 		Loading,
-		Loaded,
-		Running
+		Loaded
 	}
 }
