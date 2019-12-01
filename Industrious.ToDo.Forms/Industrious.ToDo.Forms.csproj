@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
-    <PackageReference Include="Industrious.Forms" Version="1.0.1" />
+    <PackageReference Include="Industrious.Forms" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Industrious.ToDo.ViewModels\Industrious.ToDo.ViewModels.csproj" />
