@@ -124,9 +124,7 @@ namespace Industrious.ToDo.ViewModels
 			if (SelectedItem != null)
 			{
 				SelectedItem.PropertyChanged += OnToDoItemPropertyChanged;
-
-				// TODO: Autofocus is causing page transitions to hitch on iOS 13; backing out for now (#13)
-				//ShouldFocusTitle = (Title.Length == 0);
+				ShouldFocusTitle = (Title.Length == 0);
 			}
 		}
 
