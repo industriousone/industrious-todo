@@ -41,5 +41,14 @@ namespace Industrious.ToDo.ViewModels.Tests
 				Assert.Equal(TestItems[0], _state.SelectedItem);
 			}
 		}
+
+
+		[Fact]
+		public void SelectedItem_DoesChange_WhenAppStateChanges()
+		{
+			var sut = new ItemListViewModel(_state);
+			_state.SelectItem(TestItems[1]);
+			Assert.Equal(TestItems[1].Title, sut.SelectedItem.Title);
+		}
 	}
 }
