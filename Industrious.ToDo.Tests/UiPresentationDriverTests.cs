@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Industrious.ToDo.Tests
@@ -7,64 +8,60 @@ namespace Industrious.ToDo.Tests
 	{
 		private class MockUiPresentation : IUiPresentation
 		{
-			public String LastState;
+			public List<String> StatesEncounted = new List<String>();
 
 			public void OnAppLoadingComplete()
 			{
-				LastState = "AppLoadingComplete";
+				StatesEncounted.Add("AppLoadingComplete");
 			}
 
 			public void OnAppLoadingStarted()
 			{
-				LastState = "AppLoadingStarted";
+				StatesEncounted.Add("AppLoadingStarted");
 			}
 
 			public void OnItemSelected()
 			{
-				LastState = "ItemSelected";
+				StatesEncounted.Add("ItemSelected");
 			}
 
 			public void OnItemSelectionCleared()
 			{
-				LastState = "ItemSelectionCleared";
+				StatesEncounted.Add("ItemSelectionCleared");
 			}
 		}
 
 
 		[Fact]
-		public void CallsOnLoadingStarting_OnRunStateLoading()
+		public void OnAppLoadingStarted_IsCalled_WhenRunStateLoading()
 		{
 			var state = new AppState();
 			var presentation = new MockUiPresentation();
 			var sut = new UiPresentationDriver(state, presentation);
-
 			state.RunState = RunState.Loading;
-			Assert.Equal("AppLoadingStarted", presentation.LastState);
+			Assert.Equal(new String[] { "AppLoadingStarted" }, presentation.StatesEncounted);
 		}
 
 
 		[Fact]
-		public void CallsOnLoadingComplete_OnRunStateLoaded()
+		public void OnAppLoadingComplete_IsCalled_WhenRunStateLoaded()
 		{
 			var state = new AppState();
 			var presentation = new MockUiPresentation();
 			var sut = new UiPresentationDriver(state, presentation);
-
 			state.RunState = RunState.Loaded;
-			Assert.Equal("AppLoadingComplete", presentation.LastState);
+			Assert.Equal(new String[] { "AppLoadingComplete", "ItemSelectionCleared" }, presentation.StatesEncounted);
 		}
 
 
 		[Fact]
-		public void CallsOnItemSelected_OnSelectedItemSet()
+		public void OnItemSelected_IsCalled_WhenItemSelected()
 		{
 			var state = new AppState();
 			var presentation = new MockUiPresentation();
 			var sut = new UiPresentationDriver(state, presentation);
-
 			state.SelectItem(new ToDoItem("Test"));
-
-			Assert.Equal("ItemSelected", presentation.LastState);
+			Assert.Equal(new String[] { "ItemSelected" }, presentation.StatesEncounted);
 		}
 
 
@@ -74,11 +71,9 @@ namespace Industrious.ToDo.Tests
 			var state = new AppState();
 			var presentation = new MockUiPresentation();
 			var sut = new UiPresentationDriver(state, presentation);
-
 			state.SelectItem(new ToDoItem("Test"));
 			state.SelectItem(null);
-
-			Assert.Equal("ItemSelectionCleared", presentation.LastState);
+			Assert.Equal(new String[] { "ItemSelected", "ItemSelectionCleared" }, presentation.StatesEncounted);
 		}
 	}
 }

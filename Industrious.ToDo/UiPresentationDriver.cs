@@ -58,6 +58,7 @@ namespace Industrious.ToDo
 			case RunState.Loaded:
 				// show the main application interface
 				_uiPresentation.OnAppLoadingComplete();
+				OnSelectedItemChanged();
 				break;
 			}
 		}
