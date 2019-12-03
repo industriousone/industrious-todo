@@ -21,8 +21,8 @@ This current iteration is a "plain" MVVM approach using mutable model objects. O
 
 The Industrious packages in use so far (I have a few more on the way) include:
 
-- [Industrious.Forms](https://github.com/industriousone/Industrious.Forms)
-- [Industrious.Mvvm](https://github.com/industriousone/Industrious.Mvvm)
+- [Industrious.Forms](https://github.com/industriousone/industrious-forms)
+- [Industrious.Mvvm](https://github.com/industriousone/industrious-mvvm)
 
 **Industrious.ToDo** is developed using [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/), and currently includes targets for iOS and Android.
 
