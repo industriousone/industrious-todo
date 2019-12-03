@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://premake.github.io/" target="blank"><img src="Assets/icons8-checkmark.svg?raw=true" height="200" width="200" alt="Industrious.ToDo" /></a>
+  <a href="https://premake.github.io/" target="blank"><img src="Assets/icons8-checkmark.svg" height="200" width="200" alt="Industrious.ToDo" /></a>
 </p>
 
 <p align="center">
