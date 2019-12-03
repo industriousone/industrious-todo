@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://premake.github.io/" target="blank"><img src="https://github.com/industriousone/industrious-todo/blob/master/Assets/icons8-checkmark.svg" height="200" width="200" alt="Industrious.ToDo" /></a>
+  <a href="https://premake.github.io/" target="blank"><img src="Assets/icons8-checkmark.svg?raw=true" height="200" width="200" alt="Industrious.ToDo" /></a>
 </p>
 
 <p align="center">
@@ -25,6 +25,14 @@ The Industrious packages in use so far (I have a few more on the way) include:
 - [Industrious.Mvvm](https://github.com/industriousone/Industrious.Mvvm)
 
 **Industrious.ToDo** is developed using [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/), and currently includes targets for iOS and Android.
+
+<p align="center">
+  <a href="Assets/ios-phone-list.png"><img src="Assets/ios-phone-list.png?raw=true" width="180"></a>
+  <a href="Assets/ios-phone-edit.png"><img src="Assets/ios-phone-edit.png?raw=true" width="180"></a>
+  <a href="Assets/android-phone-list.png"><img src="Assets/android-phone-list.png?raw=true" width="180"></a>
+  <a href="Assets/android-phone-edit.png"><img src="Assets/android-phone-edit.png?raw=true" width="180"></a>
+  <a href="Assets/ios-tablet.png"><img src="Assets/ios-tablet.png?raw=true" width="480"></a>
+</p>
 
 ## Stay in touch
 
