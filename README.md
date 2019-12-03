@@ -15,9 +15,9 @@
 
 An Industrious One take on the canonical to-do list example application.
 
-I use this one to demonstrate how to use the various Industrious packages together in something resembling a real world application. It also makes a nice sandbox for experimenting with new approaches and ideas; you'll catch me playing here from time to time. I've tried to architect it as I would any "real" application to make it a meaningful testbed.
+I'm using this one to demonstrate the various Industrious packages together in something resembling a real world application. It also makes a nice sandbox for experimenting with new approaches and ideas; you'll catch me playing here from time to time (currently toying with a new state-based navigation approach). I've tried to architect it as I would any "real" application to make it a meaningful testbed.
 
-This current iteration is a "plain" MVVM approach using mutable model objects. Once I have everything working to my liking I'll introduce a [Redux](https://redux.js.org)-style unidirectional data flow with immutable objects. (I'm taking this approach to verify that the support libraries work property with both mutable and immutable objects.) I'm also experiementing with different approaches to state-based navigation controllers.
+This current iteration is a "plain" MVVM approach using mutable model objects. Once I have everything working to my liking I'll introduce a [Redux](https://redux.js.org)-style unidirectional data flow with immutable objects. (I'm taking this approach to verify that the support libraries work property with both mutable and immutable objects.)
 
 The Industrious packages in use so far (I have a few more on the way) include:
 
